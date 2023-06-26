@@ -1,0 +1,90 @@
+
+  h1 {
+    color: #ffffff;
+    font-size: 50px;
+    text-align: center;
+    padding: 0px;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+hr{
+  border: none;
+  height: 3px;
+  background-color: rgb(97, 162, 134);
+}
+
+ p{
+  text-align:center;
+  font-size: 20px;
+  color: #ffffff;
+ } 
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    margin-top:auto;
+  }
+  
+  .column {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .circle-button {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #529d57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    font-size:30px;
+  }
+
+  #live-text, #notifications {
+    height: 100%;
+    border: 1px solid #ccc;
+  }
+  
+.button-icon{
+  width: 40px;
+  height: 40px;
+  filter: invert(100%);
+}
+
+#specialbutton {
+  position: absolute;
+  top: 140px;
+  right: 20px;
+}
+
+#leaves {
+  background-image: "{{ url_for('static', filename='leaves.jpg') }}";
+  background-size: cover;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 999;
+}
+
+#maincontent {
+  margin-top: 180px;
+}
