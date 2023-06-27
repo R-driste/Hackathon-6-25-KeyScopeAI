@@ -45,12 +45,11 @@ num_classes = len(label_encoder.classes_)
 y_train = to_categorical(y_train, num_classes=num_classes)
 
 #loading model weights before usage
-model.load_weights('static/python/model_weights_2.h5')
+model.load_weights('static/python/model_weights_4.h5')
 
 #storing tokenized sentences in memory
 preprocessed = []
 audios = []
-print('hehehehehhehehehe')
 
 #ai process function
 def aiprocess(data):
