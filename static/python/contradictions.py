@@ -25,8 +25,6 @@ def read_csv_with_error_handling(file_path):
     df = pd.DataFrame(rows[1:], columns=rows[0])  
     return df
 
-#/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Embedding, LSTM, Dense, Concatenate, Dropout, Bidirectional
 from tensorflow.keras.callbacks import EarlyStopping
@@ -62,47 +60,3 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.summary()
 
 early_stopping = EarlyStopping(patience=3, monitor='val_loss', restore_best_weights=True)
-
-#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from keras.utils import to_categorical
-from sklearn.preprocessing import LabelEncoder
-
-def get_dev():
-  df_dev = pd.read_csv("static/python/snli_1.0_dev.csv")
-  return df_dev
-def get_train():
-  df_train = read_csv_with_error_handling("static/python/snli_1.0_train.csv")
-  return df_train
-def get_test():
-  df_test = pd.read_csv("static/python/snli_1.0_test.csv")
-  return df_test
-
-df_dev = get_dev()
-df_train = get_train()
-df_test = get_test()
-df_concatenated = pd.concat([df_dev, df_train], axis=0)
-df_train = df_concatenated.reset_index(drop=True)
-df_train = df_train[df_train['gold_label'] != '-']
-x1_train,x2_train,y_train = df_train["sentence1_binary_parse"],df_train["sentence2_binary_parse"],df_train["gold_label"]
-print('doneee')
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-
-max_seq_length = 50  
-
-tokenizer = Tokenizer(num_words=20000)  
-tokenizer.fit_on_texts(x1_train + x2_train)  
-
-x1_train = tokenizer.texts_to_sequences(x1_train)
-x2_train = tokenizer.texts_to_sequences(x2_train)
-
-label_encoder = LabelEncoder()
-y_train = label_encoder.fit_transform(y_train)
-
-num_classes = len(label_encoder.classes_)
-y_train = to_categorical(y_train, num_classes=num_classes)
-
-x1_train = pad_sequences(x1_train, maxlen=max_seq_length, padding='post')
-x2_train = pad_sequences(x2_train, maxlen=max_seq_length, padding='post')
