@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, redirect, url_for, render_template
-from static.python.aiprocessing import aiprocess
+from static.python.aiprocessing import aiprocess, clearlist
 
 app = Flask(__name__)
 
@@ -19,8 +19,9 @@ def page_not_found(error):
 def your_python_endpoint():
     data = request.get_json() 
     print(data)
-    aiprocess(data)
-    return jsonify(f"success, {data}")
+    result = aiprocess(data)
+    return jsonify(f"success, {result}")
 
 if __name__ == "__main__":
+    clearlist()
     app.run(debug=True)
